@@ -6,7 +6,7 @@ from tkinter import *
 import tkinter.messagebox as mb
 import tkinter.ttk as ttk
 
-# The program connects to the database for managing expenses.
+
 connector = sqlite3.connect("Expense Tracker.db")
 cursor = connector.cursor()
 
@@ -15,7 +15,7 @@ connector.execute(
 )
 connector.commit()
 
-# The following functions handle various operations in the expense tracker.
+
 def list_all_expenses():
 	global connector, table
 
@@ -175,7 +175,7 @@ def expense_to_words_before_adding():
 		mb.showinfo('Ok', 'Please take your time to add this record')
 
 
-# The application defines backgrounds and fonts for the user interface elements.
+
 dataentery_frame_bg = 'Red'
 buttons_frame_bg = 'Tomato'
 hlb_btn_bg = 'IndianRed'
@@ -184,7 +184,7 @@ lbl_font = ('Georgia', 13)
 entry_font = 'Times 13 bold'
 btn_font = ('Gill Sans MT', 13)
 
-# The GUI window gets initialized here with basic properties.
+
 root = Tk()
 root.title('PythonGeeks Expense Tracker')
 root.geometry('1200x550')
@@ -192,13 +192,11 @@ root.resizable(0, 0)
 
 Label(root, text='EXPENSE TRACKER', font=('Noto Sans CJK TC', 15, 'bold'), bg=hlb_btn_bg).pack(side=TOP, fill=X)
 
-# Variables for holding string and double values in the interface.
+
 desc = StringVar()
 amnt = DoubleVar()
 payee = StringVar()
 MoP = StringVar(value='Cash')
-
-# Frames are created and positioned within the main window.
 data_entry_frame = Frame(root, bg=dataentery_frame_bg)
 data_entry_frame.place(x=0, y=30, relheight=0.95, relwidth=0.25)
 
@@ -208,7 +206,7 @@ buttons_frame.place(relx=0.25, rely=0.05, relwidth=0.75, relheight=0.21)
 tree_frame = Frame(root)
 tree_frame.place(relx=0.25, rely=0.26, relwidth=0.75, relheight=0.74)
 
-# Elements in the data entry frame are placed for user input.
+
 Label(data_entry_frame, text='Date (M/DD/YY) :', font=lbl_font, bg=dataentery_frame_bg).place(x=10, y=50)
 date = DateEntry(data_entry_frame, date=datetime.datetime.now().date(), font=entry_font)
 date.place(x=160, y=50)
@@ -231,7 +229,7 @@ Button(data_entry_frame, text='Add expense', command=add_another_expense, font=b
        bg=hlb_btn_bg).place(x=10, y=395)
 Button(data_entry_frame, text='Convert to words before adding', font=btn_font, width=30, bg=hlb_btn_bg).place(x=10,y=450)
 
-# Buttons in the buttons frame provide quick access to functions.
+
 Button(buttons_frame, text='Delete Expense', font=btn_font, width=25, bg=hlb_btn_bg, command=remove_expense).place(x=30, y=5)
 
 Button(buttons_frame, text='Clear Fields in DataEntry Frame', font=btn_font, width=25, bg=hlb_btn_bg,
@@ -247,7 +245,7 @@ Button(buttons_frame, text='Edit Selected Expense', command=edit_expense, font=b
 Button(buttons_frame, text='Convert Expense to a sentence', font=btn_font, width=25, bg=hlb_btn_bg,
        command=selected_expense_to_words).place(x=640, y=65)
 
-# The treeview frame displays the expenses in a tabular format.
+
 table = ttk.Treeview(tree_frame, selectmode=BROWSE, columns=('ID', 'Date', 'Payee', 'Description', 'Amount', 'Mode of Payment'))
 
 X_Scroller = Scrollbar(tree_frame, orient=HORIZONTAL, command=table.xview)
@@ -276,6 +274,5 @@ table.place(relx=0, y=0, relheight=1, relwidth=1)
 
 list_all_expenses()
 
-# The GUI window is finalized and starts the main loop.
 root.update()
 root.mainloop()
